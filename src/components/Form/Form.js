@@ -1,14 +1,15 @@
 import React, { useState } from "react";
 import "./Form.css";
-import { uid } from "uid";
+import { uid } from 'uid';
 
 // Form component
 const Form = (props) => {
   // State variables for title, text, and form visibility
   console.log(props);
-  const [title, setTitle] = useState("");
-  const [text, setText] = useState("");
-  const [isActiveForm, setIsActiveForm] = useState(false);
+  const { edit, selectedNote, toggleModal } = props;
+  const [title, setTitle] = useState((edit && selectedNote.title) || "");
+  const [text, setText] = useState((edit && selectedNote.text) || "");
+  const [isActiveForm, setIsActiveForm] = useState(edit);
 
   // Event handler for title input change
   const titleChangeHandler = (event) => setTitle(event.target.value);
@@ -28,16 +29,22 @@ const Form = (props) => {
     //   Text: ""
     // })
 
+    if(!edit) {
     const note = {
-      id: uid(), // Generate unique ID for the note
+      id: uid(),// Generate unique ID for the note
       title,
       text,
     };
+    console.log(note)
     props.addNote(note); // Call addNote function from props
-    setTitle(""); // Clear title input
-    setText(""); // Clear text input
     setIsActiveForm(false); // Hide form after submission
+  } else {
+    toggleModal()
+  }
   };
+
+  setTitle(""); // Clear title input
+  setText(""); // Clear text input
 
   // Event handler for form click
   const formClickHandler = () => {
@@ -51,13 +58,11 @@ const Form = (props) => {
         <form
           onSubmit={submitFormHandler}
           className={isActiveForm ? "form" : ""}
-          id="form"
         >
           {isActiveForm && (
             <input
               onChange={titleChangeHandler}
               value={title}
-              id="note-title"
               type="text"
               className="note-title"
               placeholder="Title"
@@ -67,7 +72,6 @@ const Form = (props) => {
           <input
             onChange={textChangeHandler}
             value={text}
-            id="note-text"
             type="text"
             className="note-text"
             placeholder="Take a note..."

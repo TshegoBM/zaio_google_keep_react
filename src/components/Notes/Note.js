@@ -2,12 +2,16 @@ import React, { useState } from "react";
 
 const Note = (props) => {
   // State hooks for title, text, and hover state
-  const [title, setTitle] = useState(props.title);
-  const [text, setText] = useState(props.text);
+  const {toggleModal, note, setSelectedNote} = props;
+  const [title, setTitle] = useState(note.title);
+  const [text, setText] = useState(note.text);
   const [isHover, setIsHover] = useState(false);
 
   // Event handler for when a note is clicked
   const noteClickHandler = () => {
+    toggleModal();
+    setSelectedNote(note);
+
     // setTitle("changed Title");
     // setText("changed Text");
   };
@@ -22,7 +26,7 @@ const Note = (props) => {
   };
 
   // Event handler for deleting a note
-  const deleteHandler = () => props.deleteNote(props.id);
+  const deleteHandler = () => props.deleteNote(note).id;
 
   return (
     <div

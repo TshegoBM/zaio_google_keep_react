@@ -39,7 +39,9 @@ console.log(
 // App functional component
 const App = () => {
   const [notes, setNotes] = useState(NOTES);
-
+  const [selectedNote, setSelectedNote] = useState({});
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  //const [selectedNote,setselectedNote]
 // Function to add a new note to the array
   const addNote = (note) => {
     setNotes((prevNotes) => {
@@ -54,14 +56,20 @@ const App = () => {
     });
   };
 
+  const toggleModal = () => {
+    setIsModalOpen((prevState) => !prevState);
+  };
+
   // JSX for the App component
   return (
     <div>
       <Navbar />
       <Sidebar />
       <Form addNote={addNote} />
-      <Notes notes={notes} deleteNote={deleteNote}/>
-      <Modal />
+      <Notes notes={notes} deleteNote={deleteNote} toggleModal={toggleModal} setSelectedNote={setSelectedNote}/> 
+     {
+     isModalOpen && (<Modal isModalOpen={isModalOpen} selectedNote={selectedNote} toggleModal={toggleModal}/>
+     )}
     </div>
   );
 };
