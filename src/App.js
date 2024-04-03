@@ -49,6 +49,22 @@ const App = () => {
     });
   };
 
+  const editNote = (editedNote) => {
+ 
+    setNotes(prevNotes => {
+      const newArray =prevNotes.map(note => {
+   
+        if(editedNote.id ===note.id) {
+         note.title =editedNote.title
+         note.text =editedNote.text
+        }
+       
+        return note;
+     })
+     return newArray;
+    })
+  }
+
   // Function to delete a note from the array
   const deleteNote = (id) => {
     setNotes((prevNotes) => {
@@ -68,7 +84,7 @@ const App = () => {
       <Form addNote={addNote} />
       <Notes notes={notes} deleteNote={deleteNote} toggleModal={toggleModal} setSelectedNote={setSelectedNote}/> 
      {
-     isModalOpen && (<Modal isModalOpen={isModalOpen} selectedNote={selectedNote} toggleModal={toggleModal}/>
+     isModalOpen && (<Modal isModalOpen={isModalOpen} selectedNote={selectedNote} toggleModal={toggleModal} editNote={editNote}/>
      )}
     </div>
   );

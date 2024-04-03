@@ -30,21 +30,25 @@ const Form = (props) => {
     // })
 
     if(!edit) {
-    const note = {
+    props.addNote({
       id: uid(),// Generate unique ID for the note
       title,
       text,
-    };
-    console.log(note)
-    props.addNote(note); // Call addNote function from props
+    }); // Call addNote function from props
     setIsActiveForm(false); // Hide form after submission
   } else {
+    props.editNote({
+      id:selectedNote.id,
+      title,
+      text
+    })
     toggleModal()
   }
-  };
-
   setTitle(""); // Clear title input
   setText(""); // Clear text input
+  };
+
+  
 
   // Event handler for form click
   const formClickHandler = () => {
