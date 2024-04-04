@@ -24,8 +24,9 @@ const Note = (props) => {
   };
 
   // Event handler for deleting a note
-  const deleteHandler = () => props.deleteNote(note).id;
-
+  const deleteHandler = (event) => {
+    props.deleteNote(note.id);
+  };
   return (
     <div
       className="note"

@@ -38,15 +38,13 @@ console.log(
 
 // App functional component
 const App = () => {
-  const [notes, setNotes] = useState(NOTES);
-  const [selectedNote, setSelectedNote] = useState({});
+  const [notes, setNotes] = useState([]);
+  const [selectedNote, setSelectedNote] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   //const [selectedNote,setselectedNote]
 // Function to add a new note to the array
   const addNote = (note) => {
-    setNotes((prevNotes) => {
-      return [...prevNotes, note];
-    });
+    setNotes([...notes, note]);
   };
 
   const editNote = (editedNote) => {
@@ -67,13 +65,13 @@ const App = () => {
 
   // Function to delete a note from the array
   const deleteNote = (id) => {
-    setNotes((prevNotes) => {
-      return prevNotes.filter(note => id !== note.id)
-    });
+    setNotes(notes.filter((note) => note.id !== id));
+    setIsModalOpen(false); // Close modal after deleting note
   };
 
+
   const toggleModal = () => {
-    setIsModalOpen((prevState) => !prevState);
+    setIsModalOpen((prev) => !prev);
   };
 
   // JSX for the App component
