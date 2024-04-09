@@ -31,7 +31,7 @@ const Form = (props) => {
 
     if(!edit) {
     props.addNote({
-      id: Math.random()+ 'abc',// Generate unique ID for the note
+      id: uid(),// Generate unique ID for the note
       title,
       text,
     }); // Call addNote function from props
