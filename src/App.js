@@ -66,7 +66,7 @@ const App = () => {
   // Function to delete a note from the array
   const deleteNote = (id) => {
     setNotes(notes.filter((note) => note.id !== id));
-    setIsModalOpen(false); // Close modal after deleting note
+    setIsModalOpen(true); // Close modal after deleting note
   };
 
 

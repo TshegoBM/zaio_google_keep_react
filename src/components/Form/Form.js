@@ -5,7 +5,7 @@ import { uid } from 'uid';
 // Form component
 const Form = (props) => {
   // State variables for title, text, and form visibility
-  console.log(props);
+  //console.log(props);
   const { edit, selectedNote, toggleModal } = props;
   const [title, setTitle] = useState((edit && selectedNote.title) || "");
   const [text, setText] = useState((edit && selectedNote.text) || "");
@@ -31,7 +31,7 @@ const Form = (props) => {
 
     if(!edit) {
     props.addNote({
-      id: uid(),// Generate unique ID for the note
+      id: Math.random()+ 'abc',// Generate unique ID for the note
       title,
       text,
     }); // Call addNote function from props
